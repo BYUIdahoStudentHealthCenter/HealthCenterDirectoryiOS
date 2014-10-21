@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0A00B9A1-0EA9-4FC1-8FCA-7431EA97EA0D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Health Center Contacts</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AC523EFF4E32F88ADD753669A6B618343D801409</key>
+		<string>https://github.com/JakobHartman/HealthCenterDirectory.git</string>
+		<key>BD3E2EA9F481EFD69E3E1FD0611920DF7741D19C</key>
+		<string>https://github.com/JakobHartman/iOS-projects.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Health Center Contacts.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AC523EFF4E32F88ADD753669A6B618343D801409</key>
+		<string>../..</string>
+		<key>BD3E2EA9F481EFD69E3E1FD0611920DF7741D19C</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/JakobHartman/HealthCenterDirectory.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AC523EFF4E32F88ADD753669A6B618343D801409</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BD3E2EA9F481EFD69E3E1FD0611920DF7741D19C</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AC523EFF4E32F88ADD753669A6B618343D801409</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Health%20Center%20Contacts</string>
+		</dict>
+	</array>
+</dict>
+</plist>
