@@ -14,7 +14,7 @@
 
 @implementation EmployeeDetailsTableVC
 
-NSArray *contactDetails;
+NSMutableArray *contactDetails;
 NSArray *detailsLabel;
 @synthesize contact;
 
@@ -23,11 +23,18 @@ NSArray *detailsLabel;
     [super viewDidLoad];
     
     NSString *fullName = [NSString stringWithFormat:@"%@ %@",contact.firstName,contact.lastName];
-    contactDetails = [[NSArray alloc] initWithObjects:contact.dptEmail, contact.dptNumber, contact.schEmail, contact.number, contact.position, contact.status, contact.tier, nil];
+    contactDetails = [[NSMutableArray alloc] initWithObjects:contact.dptEmail, contact.dptNumber, contact.schEmail, contact.number, contact.position, contact.status, contact.tier, nil];
     
     detailsLabel = [NSArray arrayWithObjects:@"Dept Email", @"Dept Number", @"School Email", @"Phone Number", @"Position", @"Status", @"Tier", nil];
     
     self.navigationItem.title = fullName;
+    
+    // Replace the actual number with a formated string
+    //
+    NSString *f3 = [[contactDetails objectAtIndex:3] substringToIndex:3];
+    NSString *m3 = [[contactDetails objectAtIndex:3] substringWithRange:NSMakeRange(3, 3)];
+    NSString *l4 = [[contactDetails objectAtIndex:3] substringWithRange:NSMakeRange(6, 4)];
+    [contactDetails replaceObjectAtIndex:3 withObject:[NSString stringWithFormat:@"%@-%@-%@",f3,m3,l4]];
 
     
     // Uncomment the following line to preserve selection between presentations.
