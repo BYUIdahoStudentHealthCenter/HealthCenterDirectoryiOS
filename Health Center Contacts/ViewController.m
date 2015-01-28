@@ -22,7 +22,6 @@
 //Name
 
 
-
 @synthesize sections;
 @synthesize people;
 @synthesize contacts;
@@ -34,10 +33,13 @@ Person *person;
 
 - (void)viewDidLoad
 {
-    
+    [super viewDidLoad];
+    self.title = @"Student Health Center";
     prefs = [NSUserDefaults standardUserDefaults];
     people = [[NSMutableArray alloc] init];
-    sections = @[@"No Data...",@"No Data...",@"No Data...",@"Settings/Sync"];
+    sections = @[@"No Data...",@"No Data...",@"No Data...",@"Sync"];
+    
+    // Gets contacts stored in filesystem
     contacts = [prefs objectForKey:@"contacts"];
     
     if (contacts == nil) {
@@ -48,7 +50,7 @@ Person *person;
             NSDictionary *item = [contacts valueForKey:items];
             person = [[Person alloc] init];
             person.firstName = [item valueForKey:@"First_Name"];
-            person.number = [item valueForKey:@"Phone_Number"];
+            person.number = [item valueForKey:@"Personal_Number"];
             person.lastName = [item valueForKey:@"Last_Name"];
             person.dptEmail = [item valueForKey:@"Department_Email"];
             person.dptNumber = [item valueForKey:@"Department_Number"];
@@ -59,13 +61,8 @@ Person *person;
             person.tier = [item valueForKey:@"Tier"];
             [people addObject:person];
         }
-        sections = @[@"Health Center Directory",@"Health Center Employee Directory",@"Emergancy Calling Tree",@"Settings/Sync"];
+        sections = @[@"Department Directory",@"Employee Directory",@"Emergancy Calling Tree",@"Sync"];
     }
-    
-    
-
-    [super viewDidLoad];
-    
     
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -76,12 +73,13 @@ Person *person;
     // Dispose of any resources that can be recreated.
 }
 
+// NUmber of Sections
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;    //count of section
 }
 
-
+// Number of Rows
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [sections count];
 }
@@ -114,14 +112,14 @@ Person *person;
     }
 }
 
--(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"goToDirectory"]){
         Directory *controller = [segue destinationViewController];
         controller.people = people;
     }
     else if([segue.identifier isEqualToString:@"goToEmployeeDirectory"]){
         employeeDirectory *controller = [segue destinationViewController];
-        controller.people = people;
+        //controller.people = people;
     }
     else if([segue.identifier isEqualToString:@"goToTree"]){
         Tree *controller = [segue destinationViewController];

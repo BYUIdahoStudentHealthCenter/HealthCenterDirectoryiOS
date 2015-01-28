@@ -62,6 +62,10 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    self.title = @"Department Directory";
+
     contacts = [[NSMutableArray alloc]init];
     healthCenterContactName =@[@"General",@"Health Desk",@"Fax",@"Conference Room"];
     
@@ -140,10 +144,7 @@
     healthCenterContactNumbers = [healthCenterContactNumbers arrayByAddingObjectsFromArray:campusContactNumber];
     
     healthCenterContactNumbers = [healthCenterContactNumbers arrayByAddingObjectsFromArray:otherContactNumber];
-    
-    
-    
-    
+   
     
     healthCenterContactNames = [healthCenterContactName arrayByAddingObjectsFromArray:fronDeskContactName];
     
@@ -160,8 +161,7 @@
     healthCenterContactNames = [healthCenterContactNames arrayByAddingObjectsFromArray:campusContactName];
     
     healthCenterContactNames = [healthCenterContactNames arrayByAddingObjectsFromArray:otherContactName];
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -169,12 +169,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
- 
-    
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -216,7 +210,7 @@
             default:
                 cell.contentView.backgroundColor = [UIColor whiteColor];
                 cell.textLabel.backgroundColor = [UIColor whiteColor];
-                cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+                cell.accessoryType = UITableViewCellAccessoryNone;
                 cell.userInteractionEnabled = YES;
                 break;
         }

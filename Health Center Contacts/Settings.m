@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadCycle;
 @property (weak, nonatomic) IBOutlet UILabel *errorMessage;
 @property (strong,nonatomic) NSMutableArray *people;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancel;
 @end
 
 @implementation Settings
@@ -35,6 +36,10 @@ NSInteger *count;
 NSUserDefaults *prefs;
 
 -(void) viewDidLoad{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    self.title = @"Sync";
+    
     prefs = [NSUserDefaults standardUserDefaults];
     loadCycle.hidden = YES;
     errorMessage.hidden = YES;
@@ -53,7 +58,7 @@ NSUserDefaults *prefs;
     authClient = [[FirebaseSimpleLogin alloc] initWithRef:myRef];
         loadCycle.hidden = NO;
         [loadCycle startAnimating];
-    [authClient loginWithEmail:@"byuishcfacebook@gmail.com" andPassword:@"Innovation!"
+    [authClient loginWithEmail:@"edd11001@byui.edu" andPassword:@"cangetin"
            withCompletionBlock:^(NSError* error, FAUser* user) {
                
                if (error) {
@@ -64,18 +69,32 @@ NSUserDefaults *prefs;
                else if(user) {
                    [myRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot){
                        NSDictionary *item = [[NSDictionary alloc] initWithDictionary:snapshot.value];
+                       [prefs removeObjectForKey:@"contacts"];
                        [prefs setObject:item forKey:@"contacts"];
+                       NSLog(@"Number of items in the firebase %ld", [item count]);
+                       [prefs synchronize];
+                       
                        
                        NSArray * allKeys = [item allKeys];
                        count = (NSInteger *)[allKeys count];
                        numContactsLabel.text = [NSString stringWithFormat:@"%lu",  (unsigned long)count];
                        [loadCycle stopAnimating];
+                       
+                       [item enumerateKeysAndObjectsUsingBlock:^(id key, id object, bool *stop) {
+                           // Links @ to parameters
+                          // NSLog(@"%@ = %@", key, object);
+                       }];
                    }];
                    NSLog(@"Success");
                }
            }];
+    
+    
 }
 
+- (IBAction)cancel:(id)sender {
+    [self performSegueWithIdentifier:@"goHome" sender:self];
+}
 
 - (IBAction)changeNameSettings:(id)sender {
     NSString *text = userName.text;

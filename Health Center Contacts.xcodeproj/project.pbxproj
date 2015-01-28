@@ -39,6 +39,7 @@
 		36C0FA46195C98510073A383 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 36C0FA45195C98510073A383 /* Settings.bundle */; };
 		36CFB4B7197740DF00579EE5 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36CFB4B6197740DF00579EE5 /* Accounts.framework */; };
 		36CFB4B9197740F300579EE5 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36CFB4B8197740F300579EE5 /* Social.framework */; };
+		63178E1E1A681B9100FEE287 /* EmployeeDetailsTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 63178E1D1A681B9100FEE287 /* EmployeeDetailsTableVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,8 @@
 		36C0FA45195C98510073A383 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		36CFB4B6197740DF00579EE5 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		36CFB4B8197740F300579EE5 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		63178E1C1A681B9100FEE287 /* EmployeeDetailsTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeDetailsTableVC.h; sourceTree = "<group>"; };
+		63178E1D1A681B9100FEE287 /* EmployeeDetailsTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeDetailsTableVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +198,8 @@
 				36449932193F8C1700C4F9B3 /* Images.xcassets */,
 				360B04B9197EE75C00E21744 /* unknown-person.png */,
 				36449921193F8C1700C4F9B3 /* Supporting Files */,
+				63178E1C1A681B9100FEE287 /* EmployeeDetailsTableVC.h */,
+				63178E1D1A681B9100FEE287 /* EmployeeDetailsTableVC.m */,
 			);
 			path = "Health Center Contacts";
 			sourceTree = "<group>";
@@ -331,6 +336,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63178E1E1A681B9100FEE287 /* EmployeeDetailsTableVC.m in Sources */,
 				36449931193F8C1700C4F9B3 /* ViewController.m in Sources */,
 				362C2F7E195DEA0300D22913 /* employeeDirectory.m in Sources */,
 				36BE024719802F7C00E10158 /* Settings.m in Sources */,
