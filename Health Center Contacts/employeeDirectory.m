@@ -41,6 +41,7 @@ NSUserDefaults *prefs;
     
     [self filterContentForSearchText:searchString];
     
+    
     return YES;
 }
 
@@ -76,13 +77,14 @@ NSUserDefaults *prefs;
     NSLog(@"Number of items in people %ld", [people count]);
 
     
-/* Sorts by last name */
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES];
+    // Sorts by last name
+    //
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     NSArray *sortedArray = [people sortedArrayUsingDescriptors:sortDescriptors];
     
     people = [NSMutableArray arrayWithArray:sortedArray];
-    
+ 
     
  
 
@@ -93,7 +95,8 @@ NSUserDefaults *prefs;
     return 1;    //count of section
 }
 
-
+// Table View Number of Rows
+//
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if(tableView == self.searchDisplayController.searchResultsTableView){
@@ -105,12 +108,12 @@ NSUserDefaults *prefs;
     }
     else{
         NSInteger number = [people count];
-        NSLog(@"else %ld", (long)number);
         return number;
     }
 }
 
-
+// Table View cell
+//
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -126,28 +129,26 @@ NSUserDefaults *prefs;
     
    if(tableView == self.searchDisplayController.searchResultsTableView){
        person = [searchResults objectAtIndex:indexPath.row];
-
-       NSString *f3 = [person.number substringToIndex:3];
-       NSString *m3 = [person.number substringWithRange:NSMakeRange(3,3)];
-       NSString *l4 = [person.number substringWithRange:NSMakeRange(6,4)];
        
-        cell.textLabel.text = [NSString stringWithFormat:@"%@, %@",person.lastName,person.firstName];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@-%@-%@",f3,m3,l4];
+       cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",person.firstName,person.lastName];
+       cell.detailTextLabel.text = person.position;
+       cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
+
     }
     else{
         person = [people objectAtIndex:indexPath.row];
-        //NSLog(@"%@",person.number);
-        NSString *f3 = [person.number substringToIndex:3];
-        NSString *m3 = [person.number substringWithRange:NSMakeRange(3, 3)];
-        NSString *l4 = [person.number substringWithRange:NSMakeRange(6, 4)];
-        cell.textLabel.text = [NSString stringWithFormat:@"%@, %@",person.lastName,person.firstName];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@-%@-%@",f3,m3,l4];
+
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",person.firstName,person.lastName];
+        cell.detailTextLabel.text = person.position;
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
 
     }
     
     return cell;
 }
 
+// Row selected
+//
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     //NSString *phoneNumber = [@"telprompt://" stringByAppendingString:cell.detailTextLabel.text];
@@ -167,6 +168,8 @@ NSUserDefaults *prefs;
     // Dispose of any resources that can be recreated.
 }
 
+// Prepare for segue
+//
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
     if([[segue identifier] isEqualToString:@"goToEmployeeDetails"]){

@@ -34,7 +34,6 @@
 		36AE9A73196C4CD900CC452D /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 36AE9A72196C4CD900CC452D /* Person.m */; };
 		36BE024719802F7C00E10158 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BE024619802F7C00E10158 /* Settings.m */; };
 		36C0FA3A195B334B0073A383 /* Directory.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C0FA39195B334B0073A383 /* Directory.m */; };
-		36C0FA3D195B42750073A383 /* Information.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C0FA3C195B42750073A383 /* Information.m */; };
 		36C0FA40195B50A00073A383 /* Tree.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C0FA3F195B50A00073A383 /* Tree.m */; };
 		36C0FA46195C98510073A383 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 36C0FA45195C98510073A383 /* Settings.bundle */; };
 		36CFB4B7197740DF00579EE5 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36CFB4B6197740DF00579EE5 /* Accounts.framework */; };
@@ -90,8 +89,6 @@
 		36BE024619802F7C00E10158 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		36C0FA38195B334B0073A383 /* Directory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Directory.h; sourceTree = "<group>"; };
 		36C0FA39195B334B0073A383 /* Directory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Directory.m; sourceTree = "<group>"; };
-		36C0FA3B195B42750073A383 /* Information.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Information.h; sourceTree = "<group>"; };
-		36C0FA3C195B42750073A383 /* Information.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Information.m; sourceTree = "<group>"; };
 		36C0FA3E195B50A00073A383 /* Tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tree.h; sourceTree = "<group>"; };
 		36C0FA3F195B50A00073A383 /* Tree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tree.m; sourceTree = "<group>"; };
 		36C0FA45195C98510073A383 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -189,8 +186,6 @@
 				362C2F7C195DEA0300D22913 /* employeeDirectory.h */,
 				362C2F7D195DEA0300D22913 /* employeeDirectory.m */,
 				36C0FA45195C98510073A383 /* Settings.bundle */,
-				36C0FA3B195B42750073A383 /* Information.h */,
-				36C0FA3C195B42750073A383 /* Information.m */,
 				3644992F193F8C1700C4F9B3 /* ViewController.h */,
 				36449930193F8C1700C4F9B3 /* ViewController.m */,
 				36AE9A71196C4CD900CC452D /* Person.h */,
@@ -341,7 +336,6 @@
 				362C2F7E195DEA0300D22913 /* employeeDirectory.m in Sources */,
 				36BE024719802F7C00E10158 /* Settings.m in Sources */,
 				36AE9A73196C4CD900CC452D /* Person.m in Sources */,
-				36C0FA3D195B42750073A383 /* Information.m in Sources */,
 				362859E0197852F6008F33F7 /* tableCells.m in Sources */,
 				3644992B193F8C1700C4F9B3 /* AppDelegate.m in Sources */,
 				36C0FA40195B50A00073A383 /* Tree.m in Sources */,

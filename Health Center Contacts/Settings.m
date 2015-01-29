@@ -15,6 +15,7 @@
 
 @interface Settings ()
 @property (weak, nonatomic) IBOutlet UITextField *userName;
+@property (weak, nonatomic) IBOutlet UITextField *password;
 @property (weak, nonatomic) IBOutlet UILabel *numContactsLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadCycle;
 @property (weak, nonatomic) IBOutlet UILabel *errorMessage;
@@ -24,6 +25,7 @@
 
 @implementation Settings
 @synthesize userName;
+@synthesize password;
 @synthesize people;
 @synthesize loadCycle;
 @synthesize numContactsLabel;
@@ -43,7 +45,14 @@ NSUserDefaults *prefs;
     prefs = [NSUserDefaults standardUserDefaults];
     loadCycle.hidden = YES;
     errorMessage.hidden = YES;
-    
+    userName.layer.borderColor=[[UIColor grayColor] CGColor];
+    userName.layer.borderWidth = 1.0f;
+    password.layer.borderColor=[[UIColor grayColor] CGColor];
+    password.layer.cornerRadius=8.0f;
+    userName.layer.cornerRadius=8.0f;
+
+
+    password.layer.borderWidth = 1;
     userName.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"name_preference"];
 }
 

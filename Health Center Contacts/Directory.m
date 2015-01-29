@@ -7,7 +7,6 @@
 //
 
 #import "Directory.h"
-#import "Information.h"
 #import "Person.h"
 @interface Directory ()
 @property (strong,nonatomic) NSMutableArray* contacts;
@@ -216,7 +215,7 @@
         }
         cell.textLabel.text = [healthCenterContactNames objectAtIndex:indexPath.row];
         cell.detailTextLabel.text = [healthCenterContactNumbers objectAtIndex:indexPath.row];
-        cell.detailTextLabel.textColor = [UIColor redColor];
+        cell.detailTextLabel.textColor = [[UIColor blueColor] colorWithAlphaComponent:0.3f];
         
         
         
@@ -258,12 +257,10 @@
             
     }
 }
-
+/*
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-        index = indexPath.row;
-    
-    [self performSegueWithIdentifier:@"goToInfo" sender:self];
+
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -295,6 +292,6 @@
     }
 }
 
-
+*/
 
 @end
