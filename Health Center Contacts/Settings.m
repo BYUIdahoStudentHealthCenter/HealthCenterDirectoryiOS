@@ -47,13 +47,12 @@ NSUserDefaults *prefs;
     errorMessage.hidden = YES;
     userName.layer.borderColor=[[UIColor grayColor] CGColor];
     userName.layer.borderWidth = 1.0f;
-    password.layer.borderColor=[[UIColor grayColor] CGColor];
-    password.layer.cornerRadius=8.0f;
     userName.layer.cornerRadius=8.0f;
-
-
+    
+    password.layer.cornerRadius=8.0f;
     password.layer.borderWidth = 1;
-    userName.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"name_preference"];
+    password.layer.borderColor=[[UIColor grayColor] CGColor];
+
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -63,11 +62,14 @@ NSUserDefaults *prefs;
     return NO;
 }
 - (IBAction)sync:(id)sender {
+    NSString *loginUsername = userName.text;
+    NSString *loginPassword = password.text;
+    
     myRef = [[Firebase alloc]initWithUrl:@"https://boiling-fire-7455.firebaseio.com/Employee"];
     authClient = [[FirebaseSimpleLogin alloc] initWithRef:myRef];
         loadCycle.hidden = NO;
         [loadCycle startAnimating];
-    [authClient loginWithEmail:@"edd11001@byui.edu" andPassword:@"cangetin"
+    [authClient loginWithEmail:loginUsername andPassword:loginPassword
            withCompletionBlock:^(NSError* error, FAUser* user) {
                
                if (error) {
@@ -98,22 +100,11 @@ NSUserDefaults *prefs;
                }
            }];
     
-    
 }
 
 - (IBAction)cancel:(id)sender {
     [self performSegueWithIdentifier:@"goHome" sender:self];
 }
 
-- (IBAction)changeNameSettings:(id)sender {
-    NSString *text = userName.text;
-    NSUserDefaults *pref3 = [NSUserDefaults standardUserDefaults];
-    [pref3 setObject:text forKey:@"name_preference"];
-    
-    if([userName.text length] == 0){
-        text = @"Default User";
-        userName.text = @"Default User";
-        [pref3 setObject:text forKey:@"name_preference"];
-    }
-}
+
 @end
