@@ -97,9 +97,24 @@ NSUserDefaults *prefs;
                        }];
                    }];
                    NSLog(@"Success");
+                   
+                   // Timer
+                   //
+                   [NSTimer scheduledTimerWithTimeInterval:1.0
+                            target:self
+                                                  selector:@selector(timerCalled)
+                                                  userInfo:nil
+                                                   repeats:NO
+                    ];
+                   
                }
            }];
     
+}
+
+- (void) timerCalled {
+    [self performSegueWithIdentifier:@"goHome" sender:self];
+
 }
 
 - (IBAction)cancel:(id)sender {
