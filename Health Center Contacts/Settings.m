@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *errorMessage;
 @property (strong,nonatomic) NSMutableArray *people;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancel;
+@property (weak, nonatomic) UITextField *activeTextField;
+@property (weak, nonatomic) IBOutlet UIScrollView *theScrollView;
 @end
 
 @implementation Settings
@@ -30,6 +32,8 @@
 @synthesize loadCycle;
 @synthesize numContactsLabel;
 @synthesize errorMessage;
+@synthesize activeTextField;
+@synthesize theScrollView;
 
 Firebase* myRef;
 FirebaseSimpleLogin* authClient;
@@ -41,6 +45,13 @@ NSUserDefaults *prefs;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"Sync";
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
     
     prefs = [NSUserDefaults standardUserDefaults];
     loadCycle.hidden = YES;
@@ -54,6 +65,7 @@ NSUserDefaults *prefs;
     password.layer.borderColor=[[UIColor grayColor] CGColor];
 
 }
+
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     if(textField == userName){
@@ -119,6 +131,47 @@ NSUserDefaults *prefs;
 
 - (IBAction)cancel:(id)sender {
     [self performSegueWithIdentifier:@"goHome" sender:self];
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    self.activeTextField = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    self.activeTextField = nil;
+}
+
+-(IBAction)dismissKeyboard {
+   // [self.activeTextField resignFirstResponder];
+    [self.view endEditing:YES];
+
+}
+
+-(void) keyboardWillHide:(NSNotification *)notification {
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    theScrollView.contentInset = contentInsets;
+    theScrollView.scrollIndicatorInsets = contentInsets;
+}
+
+- (void)keyboardWasShown:(NSNotification *)notification {
+    //Get the size of the keyboard
+    //
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    //Adjust the bottom content inset of your scroll view by the keyboard height
+    //
+    UIEdgeInsets contentInsets =  UIEdgeInsetsMake(0.0,0.0,keyboardSize.height,0.0);
+    theScrollView.contentInset = contentInsets;
+    theScrollView.scrollIndicatorInsets = contentInsets;
+    
+    //Scroll the target text field into view
+
+    CGRect aRect = self.view.bounds;
+    aRect.size.height -= keyboardSize.height;
+    if (!CGRectContainsPoint(aRect, activeTextField.frame.origin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, activeTextField.frame.origin.y - (keyboardSize.height - 15));
+        [theScrollView setContentOffset:scrollPoint animated:YES];
+    }
 }
 
 
