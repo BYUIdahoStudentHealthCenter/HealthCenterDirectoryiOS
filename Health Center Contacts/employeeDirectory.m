@@ -31,16 +31,23 @@ NSUserDefaults *prefs;
 
 @synthesize people;
 
--(void) filterContentForSearchText:(NSString*)searchText{
+/**
+ * filter content for search text: scope
+ **/
+-(void) filterContentForSearchText:(NSString*)searchText scope:(NSString *)scope{
     //[searchResults removeAllObjects];
     NSPredicate * resultPredicate = [NSPredicate predicateWithFormat:@"firstName beginswith[c] %@", searchText];
     searchResults = [NSMutableArray arrayWithArray:[people filteredArrayUsingPredicate:resultPredicate]];
 }
 
+/**
+ * search display controller: should reload table for search string
+ **/
 -(BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
     
-    [self filterContentForSearchText:searchString];
-    
+    [self filterContentForSearchText:searchString scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+                                                         objectAtIndex:[self.searchDisplayController.searchBar
+                                                         selectedScopeButtonIndex]]];
     
     return YES;
 }
@@ -154,12 +161,17 @@ NSUserDefaults *prefs;
     //NSString *phoneNumber = [@"telprompt://" stringByAppendingString:cell.detailTextLabel.text];
     //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneNumber]];
     
-    // selects person from people array at the index
-    personPass = [people objectAtIndex:indexPath.row];
-    NSLog(@"%@%@", @"Person =", [[people objectAtIndex:indexPath.row] firstName]);
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        personPass = [searchResults objectAtIndex:indexPath.row];
+        [self performSegueWithIdentifier:@"goToEmployeeDetails" sender:self];
+    }
+    else {
+        // selects person from people array at the index
+        personPass = [people objectAtIndex:indexPath.row];
+        NSLog(@"%@%@", @"Person =", [[people objectAtIndex:indexPath.row] firstName]);
 
-    [self performSegueWithIdentifier:@"goToEmployeeDetails" sender:self];
-
+        [self performSegueWithIdentifier:@"goToEmployeeDetails" sender:self];
+    }
 }
 
 - (void)didReceiveMemoryWarning

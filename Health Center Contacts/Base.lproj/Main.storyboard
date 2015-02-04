@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="sW2-FZ-vGE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="sW2-FZ-vGE">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -207,29 +207,13 @@ IA
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Zb-Wb-ab0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="ILx-TM-dcI">
-                    <connections>
-                        <outlet property="delegate" destination="mhj-2z-9jK" id="cZb-ts-VXE"/>
-                        <outlet property="searchContentsController" destination="mhj-2z-9jK" id="2J1-0l-QDE"/>
-                        <outlet property="searchResultsDataSource" destination="mhj-2z-9jK" id="Y5v-SE-czL"/>
-                        <outlet property="searchResultsDelegate" destination="mhj-2z-9jK" id="Mao-QR-kWx"/>
-                    </connections>
-                </searchDisplayController>
-                <searchDisplayController id="r7a-O0-B4y">
-                    <connections>
-                        <outlet property="delegate" destination="mhj-2z-9jK" id="hsD-oz-VsB"/>
-                        <outlet property="searchContentsController" destination="mhj-2z-9jK" id="zPE-ey-lPp"/>
-                        <outlet property="searchResultsDataSource" destination="mhj-2z-9jK" id="t95-gW-R9e"/>
-                        <outlet property="searchResultsDelegate" destination="mhj-2z-9jK" id="Jde-K1-b3d"/>
-                    </connections>
-                </searchDisplayController>
                 <searchDisplayController id="m2P-eG-HYa">
                     <connections>
                         <outlet property="delegate" destination="mhj-2z-9jK" id="rVB-Pa-kXh"/>
                         <outlet property="searchBar" destination="Ayt-0x-1hR" id="WBU-oh-KIA"/>
-                        <outlet property="searchContentsController" destination="mhj-2z-9jK" id="Q6F-tG-B4R"/>
-                        <outlet property="searchResultsDataSource" destination="mhj-2z-9jK" id="Jmh-xf-W5C"/>
-                        <outlet property="searchResultsDelegate" destination="mhj-2z-9jK" id="1aC-UZ-uI1"/>
+                        <outlet property="searchContentsController" destination="mhj-2z-9jK" id="YJf-eO-stI"/>
+                        <outlet property="searchResultsDataSource" destination="mhj-2z-9jK" id="2Ig-oS-eKE"/>
+                        <outlet property="searchResultsDelegate" destination="mhj-2z-9jK" id="XJe-1B-j54"/>
                     </connections>
                 </searchDisplayController>
             </objects>
