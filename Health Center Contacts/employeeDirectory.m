@@ -91,12 +91,10 @@ NSUserDefaults *prefs;
     NSArray *sortedArray = [people sortedArrayUsingDescriptors:sortDescriptors];
     
     people = [NSMutableArray arrayWithArray:sortedArray];
- 
-    
- 
-
 
 }
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;    //count of section
