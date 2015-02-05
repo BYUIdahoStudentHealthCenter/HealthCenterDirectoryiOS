@@ -10,6 +10,7 @@
 
 // Private variables and methods
 @interface EmployeeDetailsTableVC ()
+@property (weak, nonatomic) IBOutlet UINavigationItem *navBarTitle;
 @end
 
 @implementation EmployeeDetailsTableVC
@@ -17,6 +18,7 @@
 NSMutableArray *contactDetails;
 NSArray *detailsLabel;
 @synthesize contact;
+@synthesize navBarTitle;
 
 
 - (void)viewDidLoad {
@@ -27,7 +29,7 @@ NSArray *detailsLabel;
     
     detailsLabel = [NSArray arrayWithObjects:@"Dept Email", @"Dept Number", @"School Email", @"Phone Number", @"Position", @"Status", @"Tier", nil];
     
-    self.navigationItem.title = fullName;
+    self.navBarTitle.title = fullName;
     
     // Replace the actual number with a formated string
     //

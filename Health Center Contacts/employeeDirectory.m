@@ -17,6 +17,7 @@
 @property (strong,nonatomic) NSDictionary *contacts;
 @property Person *person;
 @property Person *personPass;
+@property NSString *search;
 @end
 
 @implementation employeeDirectory
@@ -24,6 +25,7 @@
 @synthesize employeeNumbers;
 @synthesize searchResults;
 @synthesize contacts;
+@synthesize search;
 
 Person *person;
 Person *personPass;
@@ -36,7 +38,20 @@ NSUserDefaults *prefs;
  **/
 -(void) filterContentForSearchText:(NSString*)searchText scope:(NSString *)scope{
     //[searchResults removeAllObjects];
-    NSPredicate * resultPredicate = [NSPredicate predicateWithFormat:@"firstName beginswith[c] %@", searchText];
+    
+    NSLog(@"Scope changed to %@",scope);
+    NSPredicate * resultPredicate;
+
+    if ([scope  isEqual: @"First Name"]) {
+        resultPredicate = [NSPredicate predicateWithFormat:@"firstName beginswith[c] %@", searchText];
+    }
+    else if ([scope isEqual: @"Last Name"]) {
+        resultPredicate = [NSPredicate predicateWithFormat:@"lastName beginswith[c] %@", searchText];
+
+    }
+    else if ([scope isEqual: @"Position"]) {
+        resultPredicate = [NSPredicate predicateWithFormat:@"position beginswith[c] %@", searchText];
+    }
     searchResults = [NSMutableArray arrayWithArray:[people filteredArrayUsingPredicate:resultPredicate]];
 }
 
@@ -45,11 +60,18 @@ NSUserDefaults *prefs;
  **/
 -(BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
     
+    search = searchString;
     [self filterContentForSearchText:searchString scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
                                                          objectAtIndex:[self.searchDisplayController.searchBar
                                                          selectedScopeButtonIndex]]];
     
     return YES;
+}
+
+-(void) searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope {
+    [self filterContentForSearchText:search scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+                                                         objectAtIndex:[self.searchDisplayController.searchBar
+                                                                        selectedScopeButtonIndex]]];
 }
 
 - (void)viewDidLoad
@@ -84,7 +106,7 @@ NSUserDefaults *prefs;
     NSLog(@"Number of items in people %ld", [people count]);
 
     
-    // Sorts by last name
+    // Sorts by first name
     //
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];

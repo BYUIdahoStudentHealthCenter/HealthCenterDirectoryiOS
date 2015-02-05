@@ -190,9 +190,14 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fCy-mW-rUW">
-                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                            <searchBar contentMode="redraw" fixedFrame="YES" showsCancelButton="YES" showsScopeBar="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fCy-mW-rUW">
+                                <rect key="frame" x="0.0" y="64" width="320" height="88"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>First Name</string>
+                                    <string>Last Name</string>
+                                    <string>Position</string>
+                                </scopeButtonTitles>
                                 <connections>
                                     <outlet property="delegate" destination="mhj-2z-9jK" id="k6b-ou-MaY"/>
                                 </connections>
@@ -285,7 +290,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="HiQ-bN-sil"/>
+                    <connections>
+                        <outlet property="navBarTitle" destination="Lfq-xA-kbS" id="3cO-Oc-tkT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VHT-lw-dv4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
