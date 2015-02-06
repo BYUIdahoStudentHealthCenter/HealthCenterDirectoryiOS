@@ -35,6 +35,11 @@ Person *person;
 {
     [super viewDidLoad];
     self.title = @"Student Health Center";
+    
+    [self.navigationController.navigationBar setBarTintColor:[UIColor cyanColor]];
+    [self.navigationController.navigationBar setTranslucent:YES];
+    
+    
     prefs = [NSUserDefaults standardUserDefaults];
     people = [[NSMutableArray alloc] init];
     sections = @[@"No Data...",@"No Data...",@"No Data...",@"Sync"];
@@ -61,7 +66,7 @@ Person *person;
             person.tier = [item valueForKey:@"Tier"];
             [people addObject:person];
         }
-        sections = @[@"Department Directory",@"Employee Directory",@"Emergancy Calling Tree",@"Sync"];
+        sections = @[@"Department Directory",@"Employee Directory",@"Emergency Calling Tree",@"Sync"];
     }
     
 	// Do any additional setup after loading the view, typically from a nib.
@@ -126,5 +131,6 @@ Person *person;
         controller.people = people;
     }
 }
+
 
 @end

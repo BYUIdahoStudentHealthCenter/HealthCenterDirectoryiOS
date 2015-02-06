@@ -103,10 +103,10 @@ NSUserDefaults *prefs;
                        numContactsLabel.text = [NSString stringWithFormat:@"%lu",  (unsigned long)count];
                        [loadCycle stopAnimating];
                        
-                       [item enumerateKeysAndObjectsUsingBlock:^(id key, id object, bool *stop) {
+                      /* [item enumerateKeysAndObjectsUsingBlock:^(id key, id object, bool *stop) {
                            // Links @ to parameters
                           // NSLog(@"%@ = %@", key, object);
-                       }];
+                       }]; */
                    }];
                    NSLog(@"Success");
                    
