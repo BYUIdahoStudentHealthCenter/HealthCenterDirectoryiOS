@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *numContactsLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadCycle;
 @property (weak, nonatomic) IBOutlet UILabel *errorMessage;
+@property (weak, nonatomic) IBOutlet UILabel *foundLabel;
 @property (strong,nonatomic) NSMutableArray *people;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancel;
 @property (weak, nonatomic) UITextField *activeTextField;
@@ -29,6 +30,7 @@
 @synthesize userName;
 @synthesize password;
 @synthesize people;
+@synthesize foundLabel;
 @synthesize loadCycle;
 @synthesize numContactsLabel;
 @synthesize errorMessage;
@@ -36,9 +38,10 @@
 @synthesize theScrollView;
 
 Firebase* myRef;
+Firebase* imgRef;
 FirebaseSimpleLogin* authClient;
 Person *person;
-NSInteger *count;
+NSString *count;
 NSUserDefaults *prefs;
 
 -(void) viewDidLoad{
@@ -56,6 +59,9 @@ NSUserDefaults *prefs;
     prefs = [NSUserDefaults standardUserDefaults];
     loadCycle.hidden = YES;
     errorMessage.hidden = YES;
+    foundLabel.hidden = YES;
+    numContactsLabel.hidden = YES;
+    
     userName.layer.borderColor=[[UIColor grayColor] CGColor];
     userName.layer.borderWidth = 1.0f;
     userName.layer.cornerRadius=8.0f;
@@ -73,11 +79,22 @@ NSUserDefaults *prefs;
     }
     return NO;
 }
+
+// The sync function
 - (IBAction)sync:(id)sender {
     NSString *loginUsername = userName.text;
     NSString *loginPassword = password.text;
     
+    foundLabel.hidden = NO;
+    
+    
+    // Firebase Employee Reference
+    
     myRef = [[Firebase alloc]initWithUrl:@"https://boiling-fire-7455.firebaseio.com/Employee"];
+    
+    // Firebase Image Reference
+    imgRef = [[Firebase alloc]initWithUrl:@"https://boiling-fire-7455.firebaseio.com/Images"];
+    
     authClient = [[FirebaseSimpleLogin alloc] initWithRef:myRef];
         loadCycle.hidden = NO;
         [loadCycle startAnimating];
@@ -90,34 +107,55 @@ NSUserDefaults *prefs;
                    errorMessage.hidden = NO;
                }
                else if(user) {
+                   //stores dictionary of employee data
                    [myRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot){
                        NSDictionary *item = [[NSDictionary alloc] initWithDictionary:snapshot.value];
                        [prefs removeObjectForKey:@"contacts"];
                        [prefs setObject:item forKey:@"contacts"];
+                       count = [NSString stringWithFormat:@"%ld",[item count]];
                        NSLog(@"Number of items in the firebase %ld", [item count]);
                        [prefs synchronize];
+  
                        
-                       
-                       NSArray * allKeys = [item allKeys];
-                       count = (NSInteger *)[allKeys count];
-                       numContactsLabel.text = [NSString stringWithFormat:@"%lu",  (unsigned long)count];
-                       [loadCycle stopAnimating];
                        
                       /* [item enumerateKeysAndObjectsUsingBlock:^(id key, id object, bool *stop) {
                            // Links @ to parameters
                           // NSLog(@"%@ = %@", key, object);
                        }]; */
                    }];
-                   NSLog(@"Success");
                    
-                   // Timer
-                   //
-                   [NSTimer scheduledTimerWithTimeInterval:1.0
-                            target:self
-                                                  selector:@selector(timerCalled)
-                                                  userInfo:nil
-                                                   repeats:NO
-                    ];
+                   //stores dictionary of image data
+                   [imgRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *imgSnapshot) {
+                       NSDictionary *pics = [[NSDictionary alloc] initWithDictionary:imgSnapshot.value];
+                       
+                       [prefs removeObjectForKey:@"pictures"];
+                       [prefs setObject:pics forKey:@"pictures"];
+                       NSLog(@"Number of items in the pictures database %ld", [pics count]);
+
+                       [prefs synchronize];
+                       [loadCycle stopAnimating];
+                       numContactsLabel.text = [NSString stringWithFormat:@"%@ contacts", count];
+                       numContactsLabel.hidden = NO;
+                       foundLabel.text = @"Success!";
+
+                       
+                      // for (id key in pics) {
+                      //  NSLog(@"key: %@, value: %@ \n",key, [pics objectForKey:key]);
+                      // }
+                       
+                       
+                   }];
+                   
+//                   NSLog(@"Success");
+//                   
+//                   // Timer
+//                   //
+//                   [NSTimer scheduledTimerWithTimeInterval:1.0
+//                            target:self
+//                                                  selector:@selector(timerCalled)
+//                                                  userInfo:nil
+//                                                   repeats:NO
+//                    ];
                    
                }
            }];

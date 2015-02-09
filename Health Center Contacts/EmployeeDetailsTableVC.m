@@ -8,9 +8,13 @@
 
 #import "EmployeeDetailsTableVC.h"
 
+
 // Private variables and methods
 @interface EmployeeDetailsTableVC ()
 @property (weak, nonatomic) IBOutlet UINavigationItem *navBarTitle;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
+
 @end
 
 @implementation EmployeeDetailsTableVC
@@ -19,6 +23,9 @@ NSMutableArray *contactDetails;
 NSArray *detailsLabel;
 @synthesize contact;
 @synthesize navBarTitle;
+@synthesize profilePicture;
+
+
 
 
 - (void)viewDidLoad {
@@ -27,9 +34,18 @@ NSArray *detailsLabel;
     NSString *fullName = [NSString stringWithFormat:@"%@ %@",contact.firstName,contact.lastName];
     contactDetails = [[NSMutableArray alloc] initWithObjects:contact.dptEmail, contact.dptNumber, contact.schEmail, contact.number, contact.position, contact.status, contact.tier, nil];
     
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSDictionary *pictures = [prefs objectForKey:@"pictures"];
+    
+    
+
+    
     detailsLabel = [NSArray arrayWithObjects:@"Dept Email", @"Dept Number", @"School Email", @"Phone Number", @"Position", @"Status", @"Tier", nil];
     
-    self.navBarTitle.title = fullName;
+    //self.nameLabel.numberOfLines = 1;
+   // self.nameLabel.adjustsFontSizeToFitWidth = YES;
+    [self.nameLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:22]];
+    self.nameLabel.text = fullName;
     
     // Replace the actual number with a formated string
     //
@@ -37,6 +53,24 @@ NSArray *detailsLabel;
     NSString *m3 = [[contactDetails objectAtIndex:3] substringWithRange:NSMakeRange(3, 3)];
     NSString *l4 = [[contactDetails objectAtIndex:3] substringWithRange:NSMakeRange(6, 4)];
     [contactDetails replaceObjectAtIndex:3 withObject:[NSString stringWithFormat:@"%@-%@-%@",f3,m3,l4]];
+
+    
+    
+
+    
+    @try {
+        NSString* imgString = [[pictures objectForKey:fullName] objectForKey:@"imageData"];
+        NSData* imgData = [[NSData alloc] initWithBase64EncodedString:imgString options:0];
+        UIImage *image = [UIImage imageWithData:imgData];
+        [[self view] addSubview:[profilePicture initWithImage:image]];
+    } @catch (NSException* e) {
+        NSLog(@"Exception: %@", e);
+    }
+    
+
+    
+    
+    
 
     
     // Uncomment the following line to preserve selection between presentations.
